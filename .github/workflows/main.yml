@@ -1,27 +1,26 @@
-name: push info
+name: Validation
 
 on:
   push:
     branches: [ "main" ]
 
 jobs:
-  build:
-     runs-on: ubuntu-latest
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
 
-     steps:
-       - uses: actions/checkout@v4
+      - name: Current date
+        run: date
+      
+      - name: disk usage
+        run : df -h
+  
+  deployment:
+    runs-on: ubuntu-latest
+    needs: validate
+    steps:
+      - name: Validation status
+        run: echo "Validation passed. Deployment can proceed."
 
-       - name: current date and time
-         run: date
-
-       - name: disk usage
-         run: df -h
-
-       - name: memory
-         run: free -h
-
-       - name: git command
-         run:  git --help
-
-       - name: print status
-         run: echo "System validation completed successfully"
