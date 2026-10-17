@@ -5,22 +5,21 @@ on:
     branches: [ "main" ]
 
 jobs:
-  validate:
+  disk_check:
     runs-on: ubuntu-latest
-    steps:
-      - name: checkout
-        uses: actions/checkout@v4
-
-      - name: Current date
-        run: date
-      
-      - name: disk usage
+    steps: 
+      - name: disk check
         run : df -h
   
+  git_check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git version
+        run: git --version
   deployment:
     runs-on: ubuntu-latest
-    needs: validate
+    needs: [ "disk_check", "git_check" ]
     steps:
-      - name: Validation status
-        run: echo "Validation passed. Deployment can proceed."
+      - name: Deployment
+        run: echo "Deployment step executed"
 
