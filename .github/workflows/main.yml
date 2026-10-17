@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps: 
       - name: disk check
-        run : df -h
+        run : df-h
   
   git_check:
     runs-on: ubuntu-latest
