@@ -21,7 +21,7 @@ jobs:
          run: free -h
 
        - name: git command
-         run:  git
+         run:  git --help
 
        - name: print status
          run: echo "System validation completed successfully"
