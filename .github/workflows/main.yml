@@ -15,7 +15,7 @@ jobs:
         run: date
       
       - name: disk usage
-        run : df-h
+        run : df -h
   
   deployment:
     runs-on: ubuntu-latest
