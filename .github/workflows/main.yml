@@ -1,30 +1,23 @@
-name: job-condition
+name: Diagnostics
 
 on:
   push:
-    branches: [ "main", "develop" ]
+    branches: [ "main" ]
     
 jobs:
-   validation:
+  validation:
     runs-on: ubuntu-latest
     steps:
       - name: Git Version
         run: git --version
       - name: Disk Usage
+        run: df-h
+  diagnostics:
+    runs-on: ubuntu-latest
+    needs: validation
+    if: always()
+    steps:
+      - name: Collecting Diagnostic Information
+        run: echo "Collecting diagnostic information"
+      - name: Disk Usage
         run: df -h
-   main_deployment:
-    runs-on: ubuntu-latest
-    needs: validation
-    if: github.ref == 'refs/heads/main'
-    steps:
-      - name : Status  
-        run: echo "Deploying from main branch"
-    
-   develop_validation:
-    runs-on: ubuntu-latest
-    needs: validation
-    if: github.ref == 'refs/heads/develop'
-    steps:
-      - name: Branch Status
-        run: echo "Running additional validation for develop"
-          
