@@ -1,0 +1,27 @@
+name: push info
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+     runs-on: ubuntu-latest
+
+     steps:
+       - uses: actions/checkout@v4
+
+       - name: current date and time
+         run: date
+
+       - name: disk usage
+         run: df -h
+
+       - name: memory
+         run: free -h
+
+       - name: git command
+         run:  git
+
+       - name: print status
+         run: echo "System validation completed successfully"
